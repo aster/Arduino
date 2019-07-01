@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
     "port": "COM3",
-    "sketch": "main.ino"
+    "sketch": "mimirror.ino"
 }
