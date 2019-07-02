@@ -32,36 +32,29 @@ void setup()
 }
 
 short swFlag = 0;
-short ignoreCnt = 0;
+bool ignoreFlag = true;
+short tmpCnt = 0;
 
 void loop()
 {
-    if (ignoreCnt = 100 && digitalRead(SW) == LOW)
+    //on led tape
+    onLed(swFlag);
+
+    if (ignoreFlag)
     {
-        ignoreCnt = 0;
-        swFlag++;
-        if (swFlag == 3)
-            swFlag = 0;
+        if (digitalRead(SW) == LOW)
+        {
+            ignoreFlag = false;
+            swFlag++;
+            if (swFlag == 3)
+                swFlag = 0;
+        }
     }
     else
     {
-        if (ignoreCnt < 100)
-            ignoreCnt++;
+        delay(100);
+        ignoreFlag = true;
     }
-
-    if (digitalRead(SW) == LOW)
-    {
-        digitalWrite(LED, HIGH);
-    }
-    else
-    {
-        digitalWrite(LED, LOW);
-    }
-
-    //setAllPixel(0xFF, 0xD6, 0xA1);
-
-    Serial.println(swFlag);
-    Serial.println(1);
 }
 
 void setAllPixel(short r, short g, short b)
@@ -70,5 +63,20 @@ void setAllPixel(short r, short g, short b)
     {
         strip.setPixelColor(i, strip.Color(r, g, b));
         strip.show();
+    }
+}
+
+void onLed(short flag)
+{
+    switch (flag)
+    {
+    case 0:
+        setAllPixel(0xFF, 0xD6, 0xA1);
+        break;
+    case 1:
+        setAllPixel(0xFF, 0xEB, 0xCD);
+        break;
+    case 2:
+        setAllPixel(0xFF, 0xFF, 0xFF);
     }
 }
