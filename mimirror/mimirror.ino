@@ -3,9 +3,8 @@
 #include <avr/power.h>
 #endif
 
-#define PIN 6
-#define SW 3
-#define LED 2
+#define PIN 3
+#define SW 4
 
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = Arduino pin number (most are valid)
@@ -21,14 +20,12 @@ void setup()
 #endif
     // End of trinket special code
 
-    pinMode(LED, OUTPUT);
     pinMode(SW, INPUT_PULLUP);
 
     strip.begin();
     strip.setBrightness(50); //0~255?
     strip.show();            // Initialize all pixels to 'off'
 
-    Serial.begin(9600);
 }
 
 short swFlag = 0;
@@ -52,7 +49,7 @@ void loop()
     }
     else
     {
-        delay(100);
+        delay(500);
         ignoreFlag = true;
     }
 }
@@ -78,5 +75,6 @@ void onLed(short flag)
         break;
     case 2:
         setAllPixel(0xFF, 0xFF, 0xFF);
+        break;
     }
 }
