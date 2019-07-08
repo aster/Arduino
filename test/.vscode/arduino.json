@@ -1,5 +1,7 @@
 {
-    "board": "arduino:avr:uno",
-    "port": "COM3",
-    "sketch": "test.ino"
+    "board": "attiny:avr:ATtinyX5",
+    "port": "COM4",
+    "sketch": "test.ino",
+    "configuration": "cpu=attiny85,clock=internal8",
+    "programmer": "Arduino as ISP"
 }
