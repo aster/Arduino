@@ -1,3 +1,4 @@
+#include <avr/sleep.h>
 #define SW PB3
 #define LED PB4
 
@@ -14,11 +15,19 @@ void setup()
 
 ISR(PCINT0_vect)
 {
-    PINB = (1 << LED);
 }
 
 void loop()
 {
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    sleep_enable();
+    sleep_cpu();
+    sleep_disable();
+
+    //PORTB |= (_BV(LED));
+    _delay_ms(3000);
+    //PORTB &= ~(_BV(LED));
+
     /*
     if (!(PINB & _BV(SW)))
     {
@@ -31,7 +40,6 @@ void loop()
     */
 
     //PINB = (1 << LED);
-    _delay_ms(100);
 }
 
 void delay_us(short us)
