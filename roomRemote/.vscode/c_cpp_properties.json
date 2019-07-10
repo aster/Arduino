@@ -1,16 +1,21 @@
 {
-    "configurations": [
-        {
-            "name": "Win32",
-            "includePath": [
-                "C:\\Program Files\\portables\\arduino-1.8.6\\tools\\**",
-                "C:\\Program Files\\portables\\arduino-1.8.6\\hardware\\arduino\\avr\\**"
+    "configurations": [{
+        "name": "Win32",
+        "includePath": [
+            "C:\\Users\\shino\\AppData\\Local\\Arduino15\\packages\\attiny\\hardware\\avr\\1.0.2\\**",
+            "C:\\\\Program Files\\\\portables\\\\arduino-1.8.6\\\\tools\\\\**",
+            "C:\\\\Program Files\\\\portables\\\\arduino-1.8.6\\\\hardware\\\\arduino\\\\avr\\\\**",
+            "C:\\\\Program Files\\\\portables\\\\arduino-1.8.6\\\\**"
+        ],
+        "forcedInclude": [],
+        "intelliSenseMode": "msvc-x64",
+        "browse": {
+            "path": [
+                "C:\\Program Files\\portables\\arduino-1.8.6"
             ],
-            "forcedInclude": [
-                "C:\\Program Files\\portables\\arduino-1.8.6\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
-            ],
-            "intelliSenseMode": "msvc-x64"
+            "limitSymbolsToIncludedHeaders": false
         }
-    ],
+
+    }],
     "version": 4
 }
