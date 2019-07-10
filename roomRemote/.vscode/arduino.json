@@ -2,5 +2,5 @@
     "board": "attiny:avr:ATtinyX5",
     "port": "COM3",
     "sketch": "roomRemote.ino",
-    "configuration": "cpu=attiny85,clock=internal8"
+    "configuration": "cpu=attiny85,clock=internal1"
 }

@@ -17,9 +17,6 @@ void setup()
     TCNT1 = 0;
 }
 
-
-
-
 void loop()
 {
     //sleep settings
@@ -40,7 +37,6 @@ void loop()
         pwmOn();
         _delay_us(200);
         pwmOff();
-
     }
 }
 

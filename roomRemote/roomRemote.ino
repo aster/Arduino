@@ -1,4 +1,6 @@
 #include <avr/sleep.h>
+
+#define F_CPU 1000000UL
 #define SW PB3
 #define LED PB4
 
@@ -32,9 +34,9 @@ void loop()
     if (!(PINB & _BV(SW))) //ピン変化割り込み時,押下のみ実行
     {
         //memo 押しっぱなしでループ＆信号は１回だけ出すようにする
-        delay(5000);
+        delay(1000);
         lightSet(1);
-        delay(5000);
+        delay(1000);
         lightSet(0);
     }
 }
@@ -90,10 +92,10 @@ void lightSet(short onFlag)
 void pwmOn()
 {
     PORTB |= _BV(LED);
-    TCCR1 = 0b10000011;
+    TCCR1 = 0b10000001;
     GTCCR = 0b01100000;
-    OCR1C = 54;
-    OCR1B = 12;
+    OCR1C = 25;
+    OCR1B = 6;
 }
 
 void pwmOff()
