@@ -26,8 +26,9 @@ void setup()
 
 long onSignal = 8061411525;
 long offSignal = 8347845;
-short margin_us = 40;
-short margin_delay = 0;
+short pulseMargin = 0;
+char sbuf[40];
+short i = 0;
 
 void loop()
 {
@@ -41,52 +42,52 @@ void loop()
     delay(10);             //チャタリング対策
     if (!(PINB & _BV(SW))) //ピン変化割り込み時,押下のみ実行
     {
-        //lightSet(1);
-        //delay(2000);
-        lightSet(0);
-        delay(2000);
+        for (i = 0; i < 10; i++)
+        {
+            //lightSet(1);
+            //delay(2000);
+            lightSet(0);
+            delay(100);
+        }
     }
 
+    /*
     //i2c serial print
-    static int num = 0;
-    char sbuf[40];
-
     sprintf(sbuf, "TinyWireM num=%d model=%s\n", num, Model);
-    num++;
     i2c_print(sbuf);
+    */
 }
+
+short blink_margin = 70;
 
 void startSignal()
 {
     //3.2ms -> on  and  1.6ms -> off
+
     pwmOn();
-    my_delay_us(3200);
+    my_delay_us(3200 + blink_margin);
     pwmOff();
-    my_delay_us(1550);
+    my_delay_us(1600 - blink_margin);
 }
 
 void signalA()
 {
     //0.4ms -> on  and  1.2ms -> off
     pwmOn();
-    //delayMicroseconds(400 + margin_delay);
-    my_delay_us(350);
+    my_delay_us(400 + blink_margin);
 
     pwmOff();
-    //delayMicroseconds(1227 - margin_us);
-    my_delay_us(1150);
+    my_delay_us(1200 - blink_margin);
 }
 
 void signalB()
 {
     //0.4ms -> on  and  0.4ms -> off
     pwmOn();
-    //delayMicroseconds(400 + margin_delay);
-    my_delay_us(350);
+    my_delay_us(400 + blink_margin);
 
     pwmOff();
-    //delayMicroseconds(429 - margin_us);
-    my_delay_us(350);
+    my_delay_us(400 - blink_margin);
 }
 
 //light on  onflag == 1
@@ -114,7 +115,7 @@ void pwmOn()
     TCCR1 = 0b10000100;
     GTCCR = 0b01100000;
     OCR1C = 25;
-    OCR1B = 7;
+    OCR1B = 9;
 }
 
 void pwmOff()
@@ -124,17 +125,17 @@ void pwmOff()
     TCNT1 = 0;
 }
 
-//1MHz -> 64us 分解能
-void my_delay_us(short d_time)
+void my_delay_us(unsigned long d_time)
 {
-    short start_time = micros();
-    short now_time = start_time;
+    unsigned long start_time = micros();
+    while (micros() - start_time < d_time)
+    {
+    };
 
-    while (now_time - start_time < d_time){
-        now_time = micros();
-    }
-    start_time = now_time = 0;
-
+    //debug
+    //i2c serial print
+    //sprintf(sbuf, "%d\n", micros()- start_time;
+    //i2c_print(sbuf);
 }
 
 ISR(PCINT0_vect)
