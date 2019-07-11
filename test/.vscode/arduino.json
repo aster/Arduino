@@ -1,7 +1,7 @@
 {
     "board": "attiny:avr:ATtinyX5",
-    "port": "COM3",
+    "port": "COM5",
     "sketch": "test.ino",
-    "configuration": "cpu=attiny85,clock=internal8",
+    "configuration": "cpu=attiny85,clock=internal1",
     "programmer": "Arduino as ISP"
 }

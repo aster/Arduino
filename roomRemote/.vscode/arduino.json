@@ -1,6 +1,7 @@
 {
     "board": "attiny:avr:ATtinyX5",
-    "port": "COM3",
+    "port": "COM5",
     "sketch": "roomRemote.ino",
-    "configuration": "cpu=attiny85,clock=internal1"
+    "configuration": "cpu=attiny85,clock=internal8",
+    "programmer": "Arduino as ISP"
 }
