@@ -26,7 +26,7 @@ void setup()
 
 long onSignal = 8061411525;
 long offSignal = 8347845;
-short pulseMargin = 0;
+short setFlag = 0; //turn on -> 1
 char sbuf[40];
 short i = 0;
 
@@ -42,12 +42,12 @@ void loop()
     delay(10);             //チャタリング対策
     if (!(PINB & _BV(SW))) //ピン変化割り込み時,押下のみ実行
     {
-        for (i = 0; i < 10; i++)
+        setFlag ^= 1;
+
+        for (i = 0; i < 3; i++)
         {
-            //lightSet(1);
-            //delay(2000);
-            lightSet(0);
-            delay(100);
+            lightSet(setFlag);
+            delay(60);
         }
     }
 
@@ -115,7 +115,7 @@ void pwmOn()
     TCCR1 = 0b10000100;
     GTCCR = 0b01100000;
     OCR1C = 25;
-    OCR1B = 9;
+    OCR1B = 7;
 }
 
 void pwmOff()
