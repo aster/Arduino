@@ -41,21 +41,18 @@ void loop()
 
     //main process
     delay(10);             //チャタリング対策
-    PORTB |= (1 << WLED);  //WLEDをHIGHに
+    if(!setFlag)PORTB |= (1 << WLED);  //WLEDをHIGHに
     if (!(PINB & _BV(SW))) //ピン変化割り込み時,押下のみ実行
     {
         setFlag ^= 1;
 
-        for (i = 0; i < 3; i++)
+        while (!(PINB & _BV(SW)))
         {
             lightSet(setFlag);
             delay(60);
         }
     }
 
-    while (!(PINB & _BV(SW)))
-    {
-    }
     PORTB &= ~(1 << WLED); //WLEDをLOWに
     /*
     //i2c serial print
