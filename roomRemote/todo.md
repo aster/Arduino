@@ -44,6 +44,7 @@ ATTINY85は3.6V動作させる<br>
 50~100mAで駆動する?<br>
 
 
+
 ---
 ## 詰まったところ  
 arduinoのdelayMicroseconds()、avr/delay.hの_delay_ms()は遅延がきつい<br>
@@ -56,3 +57,14 @@ attiny85はsoftware serialが意外と使える<br>
 <br>
 PB5はRESETに設定(ヒューズビットで指定)されてると使えない<br>
 <br>
+2SC1815Yのデータシート、Icを100mAとかにするとhFEが超下がる<br>
+<br>
+
+---
+## 最終的な仕様
+ハードはそのまま<br>
+<br>
+LEDの頭を削っても指向性がつよつよなので、ソフトで対処<br>
+<br>
+具体的には、おまけの白LEDで、ONとOFFの見分けがつくようにして、<br>
+シーリングライトが切り替えるまで押しっぱ<br>
