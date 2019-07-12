@@ -53,3 +53,6 @@ arduinoのmicros()を用いてdelay関数を自作<br>
 off時間を-70us、on時間を+70usして対処<br>
 <br>
 attiny85はsoftware serialが意外と使える<br>
+<br>
+PB5はRESETに設定(ヒューズビットで指定)されてると使えない<br>
+<br>

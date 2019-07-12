@@ -5,13 +5,14 @@
 #define Model "ATtiny85"
 #define SW PB3
 #define LED PB4
+#define WLED PB1
 
 void setup()
 {
 
     //pin settings
-    DDRB = (1 << LED);   //LEDを出力
-    PORTB = ~(1 << LED); //LEDをLOWに その他をプルアップ(SW)
+    DDRB = (1 << LED) | (1 << WLED);     //LEDを出力
+    PORTB = ~((1 << LED) | (1 << WLED)); //LEDをLOWに その他をプルアップ(SW)
 
     //interrupt settings
     GIMSK = 0x20; //PCIE -> enable
@@ -40,6 +41,7 @@ void loop()
 
     //main process
     delay(10);             //チャタリング対策
+    PORTB |= (1 << WLED);  //WLEDをHIGHに
     if (!(PINB & _BV(SW))) //ピン変化割り込み時,押下のみ実行
     {
         setFlag ^= 1;
@@ -51,6 +53,10 @@ void loop()
         }
     }
 
+    while (!(PINB & _BV(SW)))
+    {
+    }
+    PORTB &= ~(1 << WLED); //WLEDをLOWに
     /*
     //i2c serial print
     sprintf(sbuf, "TinyWireM num=%d model=%s\n", num, Model);
