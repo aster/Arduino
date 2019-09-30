@@ -22,7 +22,7 @@ void setup()
   {
     parse = 0;
   }
-  if(( current_a == 1 ) && ( current_b == 0 ))    // A=1 B = 0 CCW
+  if(( current_a == 1 ) && ( current_b == 0 ))    // A=1,B=0
   {
     parse = 1;
   }
@@ -30,7 +30,7 @@ void setup()
   {
     parse = 2;
   }
-  if(( current_a == 0 ) && ( current_b == 1 ))    // A,Bとも０
+  if(( current_a == 0 ) && ( current_b == 1 ))    // A=0,B=1
   {
     parse = 3;
   }
@@ -60,55 +60,19 @@ void rotary_changedPin()
     {
       rot_count--;
       direction = 0; //CCW
-      parse = 3;
+      parse = 1;
       return;
     } else if (( now_a == 0 ) && ( now_b == 1)) //foward = CW
     {
         rot_count++;
         direction = 1;    //CW
-        parse = 1;
+        parse = 3;
         return;
     } else {
          // fatal error
     }
   } 
   if( parse == 1 )
-  {
-    if(( now_a == 0 ) && (now_b == 0 )) // reverse = CCW
-    {
-      rot_count--;
-      direction= 0;    //CCW
-      parse = 3;
-      return;
-    } else if (( now_a == 1 ) && ( now_b == 1)) //foward = CW
-    {
-        rot_count++;
-        direction = 1;    // CW
-        parse = 2;
-        return;
-    } else {
-       // fatal error
-    }
-  }
-  if( parse == 2 )
-  {
-    if(( now_a == 1 ) && (now_b == 0 )) // reverse = CCW
-    {
-      rot_count--;
-      direction= 0;    //CCW
-      parse = 1;
-      return;
-    } else if (( now_a == 0 ) && ( now_b == 1)) //foward = CW
-    {
-        rot_count++;
-        direction = 1;    // CW
-        parse = 3;
-        return;
-    } else {
-       // fatal error
-    }
-  }
-  if( parse == 3 )
   {
     if(( now_a == 1 ) && (now_b == 1 )) // reverse = CCW
     {
@@ -121,6 +85,42 @@ void rotary_changedPin()
         rot_count++;
         direction = 1;    // CW
         parse = 0;
+        return;
+    } else {
+       // fatal error
+    }
+  }
+  if( parse == 2 )
+  {
+    if(( now_a == 0 ) && (now_b == 1 )) // reverse = CCW
+    {
+      rot_count--;
+      direction= 0;    //CCW
+      parse = 3;
+      return;
+    } else if (( now_a == 1 ) && ( now_b == 0)) //foward = CW
+    {
+        rot_count++;
+        direction = 1;    // CW
+        parse = 1;
+        return;
+    } else {
+       // fatal error
+    }
+  }
+  if( parse == 3 )
+  {
+    if(( now_a == 0 ) && (now_b == 0 )) // reverse = CCW
+    {
+      rot_count--;
+      direction= 0;    //CCW
+      parse = 0;
+      return;
+    } else if (( now_a == 1 ) && ( now_b == 1)) //foward = CW
+    {
+        rot_count++;
+        direction = 1;    // CW
+        parse = 2;
         return;
     } else {
        // fatal error
