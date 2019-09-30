@@ -1,7 +1,7 @@
 #define pinA 2
 #define pinB 3
 
-short rot_count = 0;  // 一周を300countとして状態が4ステップなので1200ステップに拡張。
+short rot_count = 0;  // 2048 8192cnt
 int direction = 0;
 int parse;
 
