@@ -6,7 +6,7 @@
 
 //solenoid connected pin
 const short SOL[] = {0, 19, 1, 18, 2, 17, 3, 16, 4};
-short SOL_count[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+short SOL_count[] = {0,  0, 0,  0, 0,  0, 0,  0, 0};
 short flag= 0;
 short now_note = 0;
 long cnt= 0;
@@ -16,18 +16,35 @@ long offset = score[0][0];
 void timerInterrupt(){
   if(flag){
     if (cnt == score[now_note][0] - offset){
-      SOL_count[score[now_note][1]] = 40;
-      now_note++:
+      SOL_count[9-score[now_note][1]] = 80;
+      now_note++;
     }
-    //カウント減らしと通電処理
-
+    //タップカウント減らしと通電処理
+    allOparation();
     cnt++;
-
 
   }else{
     if(digitalRead(SW) == LOW){
       digitalWrite(R_LED, HIGH);
       flag=1;
+    }else{
+      digitalWrite(R_LED, LOW);
+    }
+  }
+
+  if(flag)digitalWrite(L_LED, HIGH);
+  else digitalWrite(L_LED, LOW);
+  
+}
+
+
+void allOparation(){
+  for(int i = 0; i < 9;i++){
+    if(SOL_count[i]>0){
+      digitalWrite(SOL[i], HIGH);
+      SOL_count[i]--;
+    }else{
+      digitalWrite(SOL[i], LOW);
     }
   }
 }
@@ -44,13 +61,4 @@ void setup() {
 }
 
 void loop() {
-
-  /*
-     for (int i = 0; i < 9; i++) {
-     digitalWrite(SOL[i], HIGH);
-     delay(40);
-     digitalWrite(SOL[i], LOW);
-     delay(460);
-     }
-   */
 }
