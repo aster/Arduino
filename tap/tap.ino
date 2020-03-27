@@ -4,6 +4,9 @@
 #define SW 7
 #define TAP_TIME 40
 
+// ソレノイドのノイズがひどい
+//フォトカプラを使用する
+
 //solenoid connected pin
 const short SOL[] = {0, 19, 1, 18, 2, 17, 3, 16, 4};
 short SOL_count[] = {0,  0, 0,  0, 0,  0, 0,  0, 0};
