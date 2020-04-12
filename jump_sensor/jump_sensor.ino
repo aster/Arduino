@@ -1,11 +1,12 @@
 #include <CapacitiveSensor.h>
+#include <Keyboard.h>
 #define SW_PIN 9
-
 CapacitiveSensor sensor = CapacitiveSensor(2,3); //(Send, Resieve)
 
 void setup() {
   pinMode(SW_PIN, INPUT_PULLUP);
   Serial.begin(9600);
+  Keyboard.begin();
   delay(10);
   while(digitalRead(SW_PIN));
 }
@@ -13,13 +14,12 @@ void setup() {
 void loop() {
   long start = millis();
   long total =  sensor.capacitiveSensor(30);
-
   Serial.print(millis() - start);
   Serial.print("\t");
   Serial.print(total);
   Serial.print("\t");
   meter(total/20 < 40 ? total/20 : 40);
-
+  if(total<200)Keyboard.write(' ');
   delay(10) ;
 }
 
