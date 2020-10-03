@@ -4,9 +4,6 @@
 #define SW 7
 #define TAP_TIME 80
 
-// ソレノイドのノイズがひどい
-//フォトカプラを使用する
-
 //solenoid connected pin
 const short SOL[] = {1, 18, 2, 17, 3, 16, 4};
 short SOL_count[] = {0,  0, 0,  0, 0,  0, 0};
@@ -26,7 +23,7 @@ void timerInterrupt(){
       SOL_count[6-score[now_note][1]] = TAP_TIME;
       now_note++;
     }
-    //タップカウント減らしと通電処理
+    //タップカウントを減らし,通電
     allOparation();
     cnt++;
   }
